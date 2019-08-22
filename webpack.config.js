@@ -145,7 +145,7 @@ module.exports = {
       algorithm: 'brotliCompress',
       compressionOptions: { level: 11 },
     }),
-  ].filter((x) => x),
+  ].filter(x => x),
   devtool: production ? false : 'eval-source-map',
   optimization: {
     noEmitOnErrors: true,

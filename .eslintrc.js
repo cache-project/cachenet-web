@@ -24,5 +24,6 @@ module.exports = {
     'jest',
   ],
   rules: {
+    'arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
   },
 };
