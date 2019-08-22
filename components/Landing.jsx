@@ -1,5 +1,8 @@
-import { h } from 'preact';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Landing() {
-  return 'Hello, world!';
+  return <div>
+    Landing <Link to="/feed">goto feed</Link>
+  </div>;
 }

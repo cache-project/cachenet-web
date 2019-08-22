@@ -1,14 +1,12 @@
-import { h } from 'preact';
-import Router from 'preact-router';
-import AsyncRoute from 'preact-async-route';
+import React from 'react';
+import { HashRouter, Route } from 'react-router-dom';
+import loadable from '@loadable/component';
 
 import Landing from './Landing';
 
 export default function App() {
-  return <Router>
-    <Landing path="/" />
-    <AsyncRoute
-      path="/feed"
-      getComponent={ () => import('./Feed').then(module => module.default) } />
-  </Router>
+  return <HashRouter>
+    <Route path="/" exact component={Landing} />
+    <Route path="/feed" component={loadable(() => import('./Feed'))} />
+  </HashRouter>;
 }

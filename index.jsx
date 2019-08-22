@@ -1,4 +1,5 @@
-import { h } from 'preact';
+import React from 'react';
+import { render } from 'react-dom';
 
 import App from './components/App';
 
@@ -8,8 +9,4 @@ window.addEventListener('load', function() {
   }
 });
 
-Preact.render(<App />, document.getElementById('app'));
-
-if (process.env.NODE_ENV === 'development') {
-  import('preact/debug');
-}
+render(<App />, document.getElementById('app'));

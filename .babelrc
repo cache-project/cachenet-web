@@ -12,10 +12,6 @@
         ["@babel/plugin-transform-runtime", {
           "corejs": 3,
           "useESModules": false,
-        }],
-        ["@babel/plugin-transform-react-jsx", {
-          "pragma": "Preact.h",
-          "pragmaFrag": "Preact.Fragment"
         }]
       ]
     }

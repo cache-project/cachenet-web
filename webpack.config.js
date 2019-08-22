@@ -7,6 +7,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const pkg = require('./package.json');
 
@@ -67,14 +68,56 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: babelConfig([['@babel/plugin-transform-react-jsx', { pragma: 'h', pragmaFrag: 'Fragment' }]]),
+          options: babelConfig([], ['@babel/preset-react']),
         },
+      },
+      {
+        test: /\.module\.s(a|c)ss$/,
+        loader: [
+          production ? MiniCssExtractPlugin.loader : 'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              sourceMap: !production,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: !production,
+            }
+          },
+        ],
+      },
+      {
+        test: /\.s(a|c)ss$/,
+        exclude: /\.module.(s(a|c)ss)$/,
+        loader: [
+          production ? MiniCssExtractPlugin.loader : 'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: !production,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: !production,
+            },
+          },
+        ],
       },
     ],
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env.CACHENET_VERSION': JSON.stringify(version),
+    }),
+    new MiniCssExtractPlugin({
+      filename: production ? 'assets/[contenthash].css' : 'assets/[name].bundle.css',
+      chunkFilename: production ? 'assets/[contenthash].css' : 'assets/[name].chunk.css',
     }),
     new HtmlWebpackPlugin({
       title: 'CacheNet',
@@ -102,13 +145,17 @@ module.exports = {
       algorithm: 'brotliCompress',
       compressionOptions: { level: 11 },
     }),
-  ].filter((x) => x),
+  ].filter(x => x),
   devtool: production ? false : 'eval-source-map',
   optimization: {
     noEmitOnErrors: true,
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: production ? {
+      'react': 'preact/compat',
+      'react-dom': 'preact/compat',
+    } : {},
   },
   devServer: {
   },

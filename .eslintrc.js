@@ -22,9 +22,4 @@ module.exports = {
   ],
   rules: {
   },
-  settings: {
-    react: {
-      pragma: 'h',
-    },
-  },
 };
