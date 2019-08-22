@@ -86,7 +86,7 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               sourceMap: !production,
-            }
+            },
           },
         ],
       },
@@ -153,7 +153,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: production ? {
-      'react': 'preact/compat',
+      react: 'preact/compat',
       'react-dom': 'preact/compat',
     } : {},
   },
