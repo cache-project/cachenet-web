@@ -1,10 +1,12 @@
 module.exports = {
+  parser: 'babel-eslint',
   env: {
     browser: true,
     es6: true,
   },
   extends: [
     'airbnb',
+    'plugin:jest/recommended',
   ],
   globals: {
     Atomics: 'readonly',
@@ -19,7 +21,9 @@ module.exports = {
   },
   plugins: [
     'react',
+    'jest',
   ],
   rules: {
+    'arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
   },
 };

@@ -2,7 +2,7 @@
 
 exports[`renders basic text and link 1`] = `
 <div>
-  Landing 
+  Landing
   <a
     href="/feed"
     onClick={[Function]}

@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 
 import App from './components/App';
 
-window.addEventListener('load', function() {
+window.addEventListener('load', () => {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('assets/sw.js');
   }

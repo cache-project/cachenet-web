@@ -9,7 +9,7 @@ test('renders basic text and link', () => {
   const component = renderer.create(
     <MemoryRouter>
       <Landing />
-    </MemoryRouter>
+    </MemoryRouter>,
   );
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
