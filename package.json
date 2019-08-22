@@ -2,8 +2,8 @@
   "scripts": {
     "build": "webpack",
     "dev-server": "webpack-dev-server",
-    "coveralls": "jest --coverage && cat ./coverage/lcov.info | codacy-coverage",
-    "test": "eslint --ext .js,.jsx --ignore-pattern dist . && jest"
+    "report-coverage": "cat ./coverage/lcov.info | codacy-coverage",
+    "test": "eslint --ext .js,.jsx --ignore-pattern dist . && jest --coverage"
   },
   "dependencies": {
     "@babel/runtime-corejs3": "^7.5.5",
