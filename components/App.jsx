@@ -1,4 +1,4 @@
-import * as Preact from 'preact';
+import { h } from 'preact';
 import Router from 'preact-router';
 import AsyncRoute from 'preact-async-route';
 

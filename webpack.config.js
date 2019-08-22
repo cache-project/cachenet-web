@@ -1,6 +1,4 @@
 const path = require('path');
-const fs = require('fs');
-const package = require('./package.json');
 
 const uuid = require('uuid');
 
@@ -10,8 +8,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
+const pkg = require('./package.json');
+
 const production = process.env.NODE_ENV === 'production';
-const version = production && package.version || uuid.v1();
+const version = production && pkg.version ? pkg.version : uuid.v1();
 
 function babelConfig(addPlugins = [], addPresets = []) {
   return {
@@ -42,11 +42,13 @@ module.exports = {
     filename: (chunkData) => {
       if (chunkData.chunk.name === 'sw') {
         return 'assets/sw.js';
-      } else if (production) {
-        return 'assets/[contenthash].js';
-      } else {
-        return 'assets/[name].bundle.js';
       }
+
+      if (production) {
+        return 'assets/[contenthash].js';
+      }
+
+      return 'assets/[name].bundle.js';
     },
     chunkFilename: production ? 'assets/[contenthash].js' : 'assets/[name].chunk.js',
   },
@@ -65,9 +67,9 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: babelConfig([['@babel/plugin-transform-react-jsx', { pragma: 'Preact.h', pragmaFrag: 'Preact.Fragment' }]]),
+          options: babelConfig([['@babel/plugin-transform-react-jsx', { pragma: 'h', pragmaFrag: 'Fragment' }]]),
         },
-      }
+      },
     ],
   },
   plugins: [
@@ -100,7 +102,7 @@ module.exports = {
       algorithm: 'brotliCompress',
       compressionOptions: { level: 11 },
     }),
-  ].filter(x => x),
+  ].filter((x) => x),
   devtool: production ? false : 'eval-source-map',
   optimization: {
     noEmitOnErrors: true,
