@@ -1,6 +1,9 @@
 language: node_js
 node_js:
 - 8
+script:
+- ./node_modules/.bin/commitlint-travis
+- npm run test
 after_script:
 - npm run report-coverage
 env:
