@@ -3,8 +3,19 @@
     "build": "webpack",
     "dev-server": "webpack-dev-server",
     "report-coverage": "cat ./coverage/lcov.info | codacy-coverage",
-    "test": "eslint --ext .js,.jsx --ignore-pattern dist . && jest --coverage"
+    "test": "eslint --ext .js,.jsx --ignore-pattern dist . && jest --coverage",
+    "lint-staged": "lint-staged"
   },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add",
+      "jest --bail --findRelatedTests"
+    ]
+  },
+  "pre-commit": [
+    "lint-staged"
+  ],
   "dependencies": {
     "@babel/runtime-corejs3": "^7.5.5",
     "@loadable/component": "^5.10.2",
@@ -37,8 +48,10 @@
     "html-webpack-plugin": "^3.2.0",
     "http-server": "^0.11.1",
     "jest": "^24.9.0",
+    "lint-staged": "^9.2.3",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.12.0",
+    "pre-commit": "^1.2.2",
     "preload-webpack-plugin": "^3.0.0-beta.4",
     "react-test-renderer": "^16.9.0",
     "sass-loader": "^7.3.1",
