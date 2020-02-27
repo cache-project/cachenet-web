@@ -32,7 +32,7 @@
     "@babel/preset-react": "^7.0.0",
     "@commitlint/config-conventional": "^8.1.0",
     "@commitlint/travis-cli": "^8.1.0",
-    "babel-eslint": "^10.0.2",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^8.0.6",
     "codacy-coverage": "^3.4.0",
     "compression-webpack-plugin": "^3.0.0",
