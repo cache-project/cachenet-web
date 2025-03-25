@@ -17,7 +17,7 @@
     "lint-staged"
   ],
   "dependencies": {
-    "@babel/runtime-corejs3": "^7.5.5",
+    "@babel/runtime-corejs3": "^7.27.0",
     "@loadable/component": "^5.10.2",
     "preact": "^10.0.0-rc.1",
     "react": "^16.9.0",
